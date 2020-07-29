@@ -22,11 +22,11 @@ Linux and macOS binaries are built from PyPi and can be copied to any location i
 
 | Version   | File                                                                                                        | SHA256 Hash (binary file)                                         |
 |-----------|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| 1.2.9     | [jtbl-1.2.9-linux.tar.gz](https://jtbl-packages.s3-us-west-1.amazonaws.com/bin/jtbl-1.2.9-linux.tar.gz)  | ffe8dfe2cc1dc446aeade32078db654de604176976be5dee89f83f0049551c45  |
+| 1.1.6     | [jtbl-1.1.6-linux.tar.gz](https://jtbl-packages.s3-us-west-1.amazonaws.com/bin/jtbl-1.1.6-linux.tar.gz)  | 7fb8e7a2d3858ac1c0975fe2646de8963dd75e7290b9bc32215bc65933e33cbf  |
 
 
 #### macOS (Mojave and higher)
 
-| Version   | File                                                                                                          | SHA256 Hash (binary file)                                         |
-|-----------|---------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| 1.2.9     | [jtbl-1.2.9-darwin.tar.gz](https://jtbl-packages.s3-us-west-1.amazonaws.com/bin/jtbl-1.2.9-darwin.tar.gz)  | 9355bf19212cce60f5f592a1a778fdf26984f4b86968ceca2a3e99792c258037  |
+| Version   | File                                                                                                       | SHA256 Hash (binary file)                                         |
+|-----------|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| 1.1.6     | [jtbl-1.1.6-darwin.tar.gz](https://jtbl-packages.s3-us-west-1.amazonaws.com/bin/jtbl-1.1.6-darwin.tar.gz)  | 34a5a0b6155a1080ea86f6c3a6e68f451fcf3e3eab8ea023735d21cae44cba25  |
