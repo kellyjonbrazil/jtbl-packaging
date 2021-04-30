@@ -3,7 +3,7 @@
 Filter JSON and JSON Lines data with Python syntax. For more information, please see the project on [GitHub](https://github.com/kellyjonbrazil/jtbl).
 
 ## Installing jtbl
-You can install `jtbl` via `pip` or by downloading the correct binary for your architecture and running it anywhere on your filesystem.
+You can install `jtbl` via `pip`, via OS Package Repositories, or by downloading the correct binary for your architecture and running it anywhere on your filesystem.
 
 ### Pip (macOS, linux, unix, Windows)
 For the most up-to-date version and the most cross-platform option, use `pip` or `pip3` to download and install `jtbl` directly from [PyPi](https://pypi.org/project/jtbl/):
@@ -14,6 +14,10 @@ For the most up-to-date version and the most cross-platform option, use `pip` or
 ```bash
 pip3 install jtbl
 ```
+
+### OS Packages
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/jtbl.svg)](https://repology.org/project/jtbl/versions)
 
 ### Binaries (x86_64)
 Linux and macOS x86_64 binaries are built from PyPi and can be copied to any location in your path and run. These binaries may not always be on the very latest `jtbl` version, but are regularly updated.
