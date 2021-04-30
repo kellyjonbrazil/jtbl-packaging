@@ -25,19 +25,27 @@ MAINTAINER="kellyjonbrazil@gmail.com"
 
 rm dist/"${NAME}"-"${VERSION}"-"${RELEASE}".x86_64.*
 rm -rf linux/*
-curl -o linux/"${NAME}"-"${VERSION}"-linux.tar.gz https://"${NAME}"-packages.s3-us-west-1.amazonaws.com/bin/"${NAME}"-"${VERSION}"-linux.tar.gz
-tar -xvf linux/"${NAME}"-"${VERSION}"-linux.tar.gz -C linux/
-rm linux/*.tar.gz
-chmod +x linux/"${NAME}"
+
+# download binary
+mkdir -p linux/usr/local/bin
+curl -o linux/usr/local/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz https://"${NAME}"-packages.s3-us-west-1.amazonaws.com/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz
+tar -xvf linux/usr/local/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz -C linux/usr/local/bin/
+rm linux/usr/local/bin/*.tar.gz
+chmod +x linux/usr/local/bin/"${NAME}"
+
+# download latest man page
+mkdir -p linux/usr/share/man/man1
+curl -o linux/usr/share/man/man1/"${NAME}".1.gz https://raw.githubusercontent.com/kellyjonbrazil/"${NAME}"/master/man/"${NAME}".1.gz
 
 fpm \
     --verbose \
     -t rpm \
     -s dir \
-    -C linux \
-    --prefix /usr/local/bin \
+    -C linux/ \
+    --prefix / \
     -n "${NAME}" \
     -v "${VERSION}" \
+    --iteration "${RELEASE}" \
     -m "${MAINTAINER}" \
     --description "${DESCRIPTION}" \
     --url "${URL}" \
@@ -46,24 +54,25 @@ fpm \
     -a x86_64 \
     --rpm-os linux \
     -p dist/"${NAME}"-"${VERSION}"-"${RELEASE}".x86_64.rpm \
-    "${NAME}"
+    -n "${NAME}"
 
 fpm \
     --verbose \
     -t deb \
     -s dir \
-    -C linux \
-    --prefix /usr/local/bin \
+    -C linux/ \
+    --prefix / \
     -n "${NAME}" \
     -v "${VERSION}" \
+    --iteration "${RELEASE}" \
     -m "${MAINTAINER}" \
     --description "${DESCRIPTION}" \
     --url "${URL}" \
     --license MIT \
     --vendor "${MAINTAINER}" \
     -a x86_64 \
-    -p dist/"${NAME}"-"${VERSION}"-"${RELEASE}".x86_64.deb \
-    "${NAME}"
+    -p dist/"${NAME}"_"${VERSION}"-"${RELEASE}"_amd64.deb \
+    -n "${NAME}"
 
 
 echo "RPM info:"
@@ -76,9 +85,9 @@ shasum -a 256 dist/"${NAME}"-"${VERSION}"-"${RELEASE}".x86_64.rpm
 echo
 
 echo "DEB info:"
-dpkg --info dist/"${NAME}"-"${VERSION}"-"${RELEASE}".x86_64.deb
+dpkg --info dist/"${NAME}"_"${VERSION}"-"${RELEASE}"_amd64.deb
 echo "included files:"
-dpkg --contents dist/"${NAME}"-"${VERSION}"-"${RELEASE}".x86_64.deb
+dpkg --contents dist/"${NAME}"_"${VERSION}"-"${RELEASE}"_amd64.deb
 echo
-shasum -a 256 dist/"${NAME}"-"${VERSION}"-"${RELEASE}".x86_64.deb
+shasum -a 256 dist/"${NAME}"_"${VERSION}"-"${RELEASE}"_amd64.deb
 echo
