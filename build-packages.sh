@@ -2,7 +2,7 @@
 
 # usage:
 # build-packages.sh <version>
-# 
+#
 # e.g.:
 # build-packages.sh 1.10.5 1
 
@@ -19,23 +19,32 @@ fi
 VERSION=$1
 RELEASE=$2
 NAME=jtbl
-DESCRIPTION="Filter JSON and JSON Lines data with Python syntax"
-URL="https://github.com/kellyjonbrazil/jtbl"
+DESCRIPTION="Print JSON and JSON Lines data as a table in the terminal"
+URL="https://github.com/kellyjonbrazil/${NAME}"
 MAINTAINER="kellyjonbrazil@gmail.com"
+RAW_URL="https://raw.githubusercontent.com/kellyjonbrazil/${NAME}"
+BIN_PATH="${HOME}"/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz
 
 rm dist/"${NAME}"-"${VERSION}"-"${RELEASE}".x86_64.*
 rm -rf linux/*
 
-# download binary
+# download binary - *** Deprecated. Now gets binary locally from home directory ***
+# mkdir -p linux/usr/local/bin
+# curl -o linux/usr/local/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz https://"${NAME}"-packages.s3-us-west-1.amazonaws.com/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz
+# tar -xvf linux/usr/local/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz -C linux/usr/local/bin/
+# rm linux/usr/local/bin/*.tar.gz
+# chmod +x linux/usr/local/bin/"${NAME}"
+
+# move binary to build directory
 mkdir -p linux/usr/local/bin
-curl -o linux/usr/local/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz https://"${NAME}"-packages.s3-us-west-1.amazonaws.com/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz
+cp "${BIN_PATH}" linux/usr/local/bin
 tar -xvf linux/usr/local/bin/"${NAME}"-"${VERSION}"-linux-x86_64.tar.gz -C linux/usr/local/bin/
 rm linux/usr/local/bin/*.tar.gz
 chmod +x linux/usr/local/bin/"${NAME}"
 
-# download latest man page
+# download man page for this version (version must be tagged in github)
 mkdir -p linux/usr/share/man/man1
-curl -o linux/usr/share/man/man1/"${NAME}".1.gz https://raw.githubusercontent.com/kellyjonbrazil/"${NAME}"/master/man/"${NAME}".1.gz
+curl -f -o "linux/usr/share/man/man1/${NAME}.1" "${RAW_URL}/v${VERSION}/man/${NAME}.1" || { echo 'curl download failed' ; exit 1; }
 
 fpm \
     --verbose \
