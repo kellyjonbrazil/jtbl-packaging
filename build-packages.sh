@@ -18,8 +18,8 @@ fi
 
 VERSION=$1
 RELEASE=$2
-NAME=jello
-DESCRIPTION="Filter JSON and JSON Lines data with Python syntax"
+NAME=jtbl
+DESCRIPTION="Print JSON and JSON Lines data as a table in the terminal"
 URL="https://github.com/kellyjonbrazil/${NAME}"
 MAINTAINER="kellyjonbrazil@gmail.com"
 RAW_URL="https://raw.githubusercontent.com/kellyjonbrazil/${NAME}"
